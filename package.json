@@ -1,0 +1,10 @@
+{
+  "name": "NodeDeneme",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
