@@ -7,17 +7,25 @@ var fs = require('fs');
 
 var express = require('express');
 var path = require('path');
-var ctrlElectronic = require('./ElectronicController');
+// ctrlElectronic became router after we exported it in EC.js file
+var routeElectronic = require('./ElectronicController');
 //var objectOfElectronic = ctrlElectronic('Hello ');
 
 var app = express();
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+app.use('/', routeElectronic);
+
+app.listen(8000);
+
+
+
+
 
 //app.get('/',indexController);
-app.get('/electronic', ctrlElectronic.index);
-app.get('/electronic/computer', ctrlElectronic.computer);
+// app.get('/electronic', ctrlElectronic.index);
+// app.get('/electronic/computer', ctrlElectronic.computer);
 
 
     //  fs.readFile('index.html', function(err, data) {
@@ -33,33 +41,6 @@ app.get('/electronic/computer', ctrlElectronic.computer);
     //         res.end(' Mesaj Bitti');
     //         console.log('loginController')
     //     });
-
-
-app.listen(8000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
