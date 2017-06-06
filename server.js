@@ -8,14 +8,16 @@ var fs = require('fs');
 var express = require('express');
 var path = require('path');
 // ctrlElectronic became router after we exported it in EC.js file
-var routeElectronic = require('./ElectronicController');
+//var routeElectronic = require('./ElectronicController');
+//var routeElectronic = require('./ElectronicRoute');
+var routeElectronic = require('./server/routes/ElectronicRoute');
 //var objectOfElectronic = ctrlElectronic('Hello ');
 
 var app = express();
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.use('/', routeElectronic);
+app.use('/electronic', routeElectronic);
 
 app.listen(8000);
 
