@@ -7,14 +7,23 @@ var fs = require('fs');
 
 var express = require('express');
 var path = require('path');
+var ejsLayouts = require('express-ejs-layouts');
 // ctrlElectronic became router after we exported it in EC.js file
 //var routeElectronic = require('./ElectronicController');
 //var routeElectronic = require('./ElectronicRoute');
-var routeElectronic = require('./server/routes/ElectronicRoute');
+
 //var objectOfElectronic = ctrlElectronic('Hello ');
+var routeElectronic = require('./server/routes/ElectronicRoute');
 
 var app = express();
 
+app.use('/electronic', routeElectronic);
+
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'/server/views'));
+
+
+app.use(ejsLayouts);
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res,next){
@@ -24,7 +33,7 @@ next();
 
 })
 
-app.use('/electronic', routeElectronic);
+
 
 app.listen(8000);
 
