@@ -1,5 +1,5 @@
 // var http = require('http');
-var fs = require('fs');
+// var fs = require('fs');
 
 // in nodejs there is no sequence of compiling
 // because of that we use call-back functions to control
@@ -11,20 +11,19 @@ var ejsLayouts = require('express-ejs-layouts');
 // ctrlElectronic became router after we exported it in EC.js file
 //var routeElectronic = require('./ElectronicController');
 //var routeElectronic = require('./ElectronicRoute');
-
-//var objectOfElectronic = ctrlElectronic('Hello ');
-var routeElectronic = require('./server/routes/ElectronicRoute');
-
 var app = express();
 
-app.use('/electronic', routeElectronic);
+//var objectOfElectronic = ctrlElectronic('Hello ');
 
 app.set('view engine','ejs');
-app.set('views',path.join(__dirname,'/server/views'));
-
-
 app.use(ejsLayouts);
+var routeElectronic = require('./server/routes/ElectronicRoute');
 app.use('/public', express.static(path.join(__dirname, 'public')));
+
+app.set('views',path.join(__dirname,'/server/views/'));
+app.use('/electronic', routeElectronic);
+
+
 
 app.use(function(req,res,next){
 console.log('url ...:'+req.originalUrl);
@@ -35,7 +34,9 @@ next();
 
 
 
-app.listen(8000);
+var listener = app.listen(2000,function () {
+    console.log('The server is running on '+listener.address().port);
+});
 
 
 
